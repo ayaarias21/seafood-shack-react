@@ -9,7 +9,7 @@ export default function Home() {
         style={{
           minHeight: "100vh",
           background:
-  "linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.65) 60%, rgba(10,10,10,1) 100%), url('/images/seafood-boil5.JPG') center/cover no-repeat",
+            "linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.65) 60%, rgba(10,10,10,1) 100%), url('/images/seafood-boil5.JPG') center/cover no-repeat",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -25,6 +25,7 @@ export default function Home() {
           >
             🦀
           </div>
+
           <h1
             style={{
               fontFamily: "'Playfair Display', serif",
@@ -60,15 +61,22 @@ export default function Home() {
             }}
           >
             Fresh seafood meets bold Caribbean & Southern coastal flavors.
-            <br />A dining experience like no other.
+            <br />
+            A dining experience like no other.
           </p>
 
           <div
-            style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}
+            style={{
+              display: "flex",
+              gap: "16px",
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
           >
             <Link to="/menu" className="btn-primary">
               Order Online
             </Link>
+
             <Link
               to="/reservation"
               style={{
@@ -89,7 +97,8 @@ export default function Home() {
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = "rgba(255,140,66,0.08)";
-                e.currentTarget.style.borderColor = "rgba(255,140,66,0.6)";
+                e.currentTarget.style.borderColor =
+                  "rgba(255,140,66,0.6)";
               }}
             >
               Reserve a Table
@@ -116,6 +125,7 @@ export default function Home() {
           }}
         >
           <span>Scroll</span>
+
           <div
             style={{
               width: "1px",
@@ -177,18 +187,11 @@ export default function Home() {
                 border: "1px solid rgba(255,140,66,0.1)",
                 transition: "all 0.3s",
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,140,66,0.35)";
-                e.currentTarget.style.background = "rgba(255,140,66,0.08)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,140,66,0.1)";
-                e.currentTarget.style.background = "rgba(255,140,66,0.04)";
-              }}
             >
               <div style={{ fontSize: "44px", marginBottom: "16px" }}>
                 {feat.icon}
               </div>
+
               <h3
                 style={{
                   fontFamily: "'Playfair Display', serif",
@@ -200,6 +203,7 @@ export default function Home() {
               >
                 {feat.title}
               </h3>
+
               <p
                 style={{
                   color: "#888",
@@ -229,38 +233,42 @@ export default function Home() {
           >
             {[
               {
-                emoji: "🦐",
                 name: "Seafood Boil",
                 desc: "Shrimp, crab, lobster in our house sauce",
                 price: "$35",
                 tag: "Most Popular",
+                img: "/images/seafood-boil.jpg",
               },
               {
-                emoji: "🦞",
                 name: "Lobster Tail",
                 desc: "Grilled with garlic butter & seasoned rice",
                 price: "$28",
                 tag: "Chef's Pick",
+                img: "/images/lobster.JPG",
               },
               {
-                emoji: "🐟",
                 name: "Grilled Salmon",
                 desc: "Atlantic salmon with lemon herb butter",
                 price: "$22",
                 tag: "",
+                img: "/images/salmon.JPG",
               },
               {
-                emoji: "🥣",
                 name: "Lobster Bisque",
                 desc: "Rich creamy soup finished with fresh cream",
                 price: "$7",
                 tag: "",
+                img: "/images/lobster-bisque.JPG",
               },
             ].map((dish, i) => (
               <div
                 key={i}
                 className="orange-card"
-                style={{ padding: "28px", position: "relative" }}
+                style={{
+                  padding: 0,
+                  overflow: "hidden",
+                  position: "relative",
+                }}
               >
                 {dish.tag && (
                   <span
@@ -278,76 +286,84 @@ export default function Home() {
                       fontFamily: "'Poppins', sans-serif",
                       textTransform: "uppercase",
                       letterSpacing: "0.5px",
+                      zIndex: 5,
+                      backdropFilter: "blur(4px)",
                     }}
                   >
                     {dish.tag}
                   </span>
                 )}
-                <div style={{ fontSize: "40px", marginBottom: "14px" }}>
-                  {dish.emoji}
-                </div>
-                <h3
+
+                <img
+                  src={dish.img}
+                  alt={dish.name}
                   style={{
-                    fontFamily: "'Playfair Display', serif",
-                    fontSize: "22px",
-                    color: "white",
-                    marginBottom: "8px",
-                    fontStyle: "italic",
+                    width: "100%",
+                    height: "220px",
+                    objectFit: "cover",
                   }}
-                >
-                  {dish.name}
-                </h3>
-                <p
-                  style={{
-                    color: "#888",
-                    fontSize: "14px",
-                    marginBottom: "16px",
-                    lineHeight: 1.6,
-                    fontFamily: "'Poppins', sans-serif",
-                  }}
-                >
-                  {dish.desc}
-                </p>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <span
+                />
+
+                <div style={{ padding: "24px" }}>
+                  <h3
                     style={{
-                      color: "#ff8c42",
-                      fontSize: "22px",
-                      fontWeight: 700,
                       fontFamily: "'Playfair Display', serif",
+                      fontSize: "22px",
+                      color: "white",
+                      marginBottom: "8px",
+                      fontStyle: "italic",
                     }}
                   >
-                    {dish.price}
-                  </span>
-                  <Link
-                    to="/menu"
+                    {dish.name}
+                  </h3>
+
+                  <p
                     style={{
-                      color: "#ff8c42",
-                      textDecoration: "none",
-                      fontSize: "13px",
+                      color: "#888",
+                      fontSize: "14px",
+                      marginBottom: "16px",
+                      lineHeight: 1.6,
                       fontFamily: "'Poppins', sans-serif",
-                      fontWeight: 600,
-                      padding: "6px 14px",
-                      border: "1px solid rgba(255,140,66,0.4)",
-                      borderRadius: "6px",
-                      transition: "all 0.2s",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background =
-                        "rgba(255,140,66,0.15)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = "transparent";
                     }}
                   >
-                    Order →
-                  </Link>
+                    {dish.desc}
+                  </p>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <span
+                      style={{
+                        color: "#ff8c42",
+                        fontSize: "22px",
+                        fontWeight: 700,
+                        fontFamily: "'Playfair Display', serif",
+                      }}
+                    >
+                      {dish.price}
+                    </span>
+
+                    <Link
+                      to="/menu"
+                      style={{
+                        color: "#ff8c42",
+                        textDecoration: "none",
+                        fontSize: "13px",
+                        fontFamily: "'Poppins', sans-serif",
+                        fontWeight: 600,
+                        padding: "6px 14px",
+                        border: "1px solid rgba(255,140,66,0.4)",
+                        borderRadius: "6px",
+                        transition: "all 0.2s",
+                      }}
+                    >
+                      Order →
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
@@ -383,6 +399,7 @@ export default function Home() {
         >
           Ready for an unforgettable meal?
         </h2>
+
         <p
           style={{
             color: "#888",
@@ -393,6 +410,7 @@ export default function Home() {
         >
           Reserve your table or order online today.
         </p>
+
         <div
           style={{
             display: "flex",
@@ -404,7 +422,20 @@ export default function Home() {
           <Link to="/reservation" className="btn-primary">
             Book a Table
           </Link>
-          <Link to="/contact" style={{ color: "#ff8c42", textDecoration: "none", display: "flex", alignItems: "center", gap: "6px", fontFamily: "'Poppins', sans-serif", fontWeight: 500, fontSize: "15px" }}>
+
+          <Link
+            to="/contact"
+            style={{
+              color: "#ff8c42",
+              textDecoration: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              fontFamily: "'Poppins', sans-serif",
+              fontWeight: 500,
+              fontSize: "15px",
+            }}
+          >
             Contact Us →
           </Link>
         </div>

@@ -26,144 +26,174 @@ const sections = [
 export default function About() {
   return (
     <>
-      {/* Hero */}
-      <section
+      <div
         style={{
-          minHeight: "55vh",
-          background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.75) 60%, rgba(10,10,10,1) 100%), linear-gradient(135deg, #1a0a00 0%, #0d0500 100%)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          padding: "120px 20px 80px",
+backgroundImage:
+  "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.72)), url('/images/interior3.JPG')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+          minHeight: "100vh",
         }}
       >
-        <div className="page-enter">
-          <div style={{ fontSize: "60px", marginBottom: "20px" }}>🦀</div>
-          <h1
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(36px,6vw,72px)",
-              color: "#ff8c42",
-              fontStyle: "italic",
-              marginBottom: "16px",
-              textShadow: "0 0 40px rgba(255,140,66,0.3)",
-            }}
-          >
-            About Us
-          </h1>
-          <p
-            style={{
-              color: "#aaa",
-              fontSize: "18px",
-              fontFamily: "'Dancing Script', cursive",
-              fontSize: "22px",
-            }}
-          >
-            The story behind the shack
-          </p>
-        </div>
-      </section>
-
-      {/* Content */}
-      <section
-        style={{
-          maxWidth: "900px",
-          margin: "0 auto",
-          padding: "80px 20px 100px",
-        }}
-      >
-        <div
+        {/* Hero */}
+        <section
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(380px, 1fr))",
-            gap: "30px",
+            minHeight: "55vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            padding: "120px 20px 80px",
           }}
         >
-          {sections.map((sec, i) => (
-            <div
-              key={i}
-              className="orange-card"
-              style={{ padding: "36px" }}
+          <div className="page-enter">
+            <div style={{ fontSize: "60px", marginBottom: "20px" }}>
+              🦀
+            </div>
+
+            <h1
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: "clamp(36px,6vw,72px)",
+                color: "#ff8c42",
+                fontStyle: "italic",
+                marginBottom: "16px",
+                textShadow: "0 0 40px rgba(255,140,66,0.3)",
+              }}
             >
+              About Us
+            </h1>
+
+            <p
+              style={{
+                color: "#ccc",
+                fontFamily: "'Dancing Script', cursive",
+                fontSize: "24px",
+              }}
+            >
+              The story behind the shack
+            </p>
+          </div>
+        </section>
+
+        {/* Content */}
+        <section
+          style={{
+            maxWidth: "1100px",
+            margin: "0 auto",
+            padding: "40px 20px 100px",
+          }}
+        >
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+              gap: "30px",
+            }}
+          >
+            {sections.map((sec, i) => (
               <div
+                key={i}
+                className="orange-card"
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "14px",
-                  marginBottom: "18px",
+                  padding: "36px",
+                  background: "rgba(10,10,10,0.92)",
+                  backdropFilter: "blur(8px)",
+                  border: "1px solid rgba(255,140,66,0.15)",
                 }}
               >
-                <span style={{ fontSize: "32px" }}>{sec.icon}</span>
-                <h2
+                <div
                   style={{
-                    fontFamily: "'Playfair Display', serif",
-                    fontSize: "22px",
-                    color: "#ff8c42",
-                    fontStyle: "italic",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "14px",
+                    marginBottom: "18px",
                   }}
                 >
-                  {sec.title}
-                </h2>
-              </div>
-              <p
-                style={{
-                  fontFamily: "'Dancing Script', cursive",
-                  fontSize: "20px",
-                  color: "#ccc",
-                  lineHeight: 1.8,
-                }}
-              >
-                {sec.text}
-              </p>
-            </div>
-          ))}
-        </div>
+                  <span style={{ fontSize: "32px" }}>{sec.icon}</span>
 
-        {/* Stats strip */}
-        <div className="divider" />
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-            gap: "20px",
-            textAlign: "center",
-          }}
-        >
-          {[
-            { value: "2026", label: "Est. Year" },
-            { value: "10+ Items", label: "Menu Items" },
-            { value: "5★", label: "Avg Rating" },
-            { value: "100%", label: "Fresh Daily" },
-          ].map((stat, i) => (
-            <div key={i}>
+                  <h2
+                    style={{
+                      fontFamily: "'Playfair Display', serif",
+                      fontSize: "24px",
+                      color: "#ff8c42",
+                      fontStyle: "italic",
+                    }}
+                  >
+                    {sec.title}
+                  </h2>
+                </div>
+
+                <p
+                  style={{
+                    fontFamily: "'Dancing Script', cursive",
+                    fontSize: "22px",
+                    color: "#ddd",
+                    lineHeight: 1.9,
+                  }}
+                >
+                  {sec.text}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Stats */}
+          <div className="divider" />
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+              gap: "20px",
+              textAlign: "center",
+              marginTop: "40px",
+            }}
+          >
+            {[
+              { value: "2026", label: "Est. Year" },
+              { value: "10+ Items", label: "Menu Items" },
+              { value: "5★", label: "Avg Rating" },
+              { value: "100%", label: "Fresh Daily" },
+            ].map((stat, i) => (
               <div
+                key={i}
                 style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: "40px",
-                  color: "#ff8c42",
-                  fontWeight: 700,
-                  marginBottom: "6px",
+                  background: "rgba(10,10,10,0.85)",
+                  padding: "30px 20px",
+                  borderRadius: "16px",
+                  border: "1px solid rgba(255,140,66,0.12)",
                 }}
               >
-                {stat.value}
+                <div
+                  style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontSize: "40px",
+                    color: "#ff8c42",
+                    fontWeight: 700,
+                    marginBottom: "6px",
+                  }}
+                >
+                  {stat.value}
+                </div>
+
+                <div
+                  style={{
+                    color: "#888",
+                    fontSize: "13px",
+                    fontFamily: "'Poppins', sans-serif",
+                    textTransform: "uppercase",
+                    letterSpacing: "1px",
+                  }}
+                >
+                  {stat.label}
+                </div>
               </div>
-              <div
-                style={{
-                  color: "#666",
-                  fontSize: "13px",
-                  fontFamily: "'Poppins', sans-serif",
-                  textTransform: "uppercase",
-                  letterSpacing: "1px",
-                }}
-              >
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
+      </div>
 
       <Footer />
     </>

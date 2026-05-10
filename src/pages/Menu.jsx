@@ -1,35 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import Footer from "../components/Footer";
-
-const menuItems = [
-  {
-    name: "Seafood Boil",
-    price: 35,
-    img: "/images/seafood-boil.jpg",
-    desc: "All you can eat seafood feast with shrimp, crab, and shellfish.",
-    hasOptions: true,
-    options: {
-      protein: ["Snow Crab Legs", "Lobster", "Shrimp", "Mussels", "Clams"],
-      sauce: ["Garlic Butter", "Cajun Sauce", "Lemon Pepper", "Combo Specialty"],
-      spice: ["Mild", "Medium", "Spicy"],
-      addon: ["No Add-on", "Potatoes", "Corn", "Sausage", "Broccoli"],
-    },
-  },
-  { name: "Lobster Tail", price: 28, img: "/images/lobster.JPG", desc: "Grilled lobster tail with garlic butter." },
-  { name: "Grilled Salmon", price: 22, img: "/images/salmon.JPG", desc: "Atlantic salmon with lemon herb butter." },
-  { name: "Calamari", price: 10, img: "/images/calamari.JPG", desc: "Crispy fried calamari & marinara." },
-  { name: "Mussels", price: 18, img: "/images/mussels.JPG", desc: "Mussels in garlic wine broth." },
-  { name: "Fried Fish", price: 16, img: "/images/fried-fish.JPG", desc: "Golden crispy fried fish." },
-  { name: "Steamed Clams", price: 17, img: "/images/clams.JPG", desc: "Clams in garlic butter broth." },
-  { name: "Clam Chowder", price: 7, img: "/images/clam-chowder.JPG", desc: "Creamy New England chowder." },
-  { name: "Lobster Bisque", price: 7, img: "/images/lobster-bisque.JPG", desc: "Rich creamy lobster soup." },
-  { name: "Shrimp Po Boy", price: 15, img: "/images/po-boy.JPG", desc: "Crispy shrimp sandwich." },
-];
+import { getMenuItems } from "../api/api";
 
 function MenuCard({ item, onAdd }) {
   const [added, setAdded] = useState(false);
+
   const handleAdd = () => {
     onAdd(item.name, item.price, {});
     setAdded(true);
@@ -38,19 +15,18 @@ function MenuCard({ item, onAdd }) {
 
   return (
     <div className="orange-card" style={{ padding: 0, overflow: "hidden" }}>
-      {/* IMAGE */}
       <img
-        src={item.img}
+        src={item.image}
         alt={item.name}
         style={{ width: "100%", height: 180, objectFit: "cover" }}
       />
 
       <div style={{ padding: 18 }}>
         <h3>{item.name}</h3>
-        <p style={{ color: "#aaa", fontSize: 14 }}>{item.desc}</p>
+        <p style={{ color: "#aaa", fontSize: 14 }}>{item.description}</p>
 
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <strong>${item.price}</strong>
+          <strong>${Number(item.price).toFixed(2)}</strong>
           <button className="btn-primary" onClick={handleAdd}>
             {added ? "✓ Added!" : "+ Add"}
           </button>
@@ -62,6 +38,16 @@ function MenuCard({ item, onAdd }) {
 
 export default function Menu() {
   const { cart, addToCart, removeFromCart, total } = useCart();
+  const [menuItems, setMenuItems] = useState([]);
+
+  useEffect(() => {
+    async function loadMenu() {
+      const data = await getMenuItems();
+      setMenuItems(data);
+    }
+
+    loadMenu();
+  }, []);
 
   return (
     <>
@@ -78,34 +64,50 @@ export default function Menu() {
           <div style={{ maxWidth: 1200, margin: "auto", padding: 40 }}>
             <h1 className="section-title">Order Online</h1>
 
-            <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 40 }}>
-              
-              {/* FOOD GRID */}
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 24 }}>
-                {menuItems.map(item => (
-                  <MenuCard key={item.name} item={item} onAdd={addToCart}/>
+            <div className="menu-layout">
+              <div className="menu-grid">
+                {menuItems.map((item) => (
+                  <MenuCard key={item._id} item={item} onAdd={addToCart} />
                 ))}
               </div>
 
-              {/* CART */}
-              <div className="orange-card" style={{ padding: 20 }}>
+              <div className="orange-card cart-box">
                 <h2>🛒 Cart</h2>
-                {cart.map(item => (
-                  <div key={item.id}>
-                    {item.name} — ${item.price}
-                    <button onClick={() => removeFromCart(item.id)}>remove</button>
-                  </div>
-                ))}
-                <h3>Total: ${total}</h3>
-                <Link to="/checkout" className="btn-primary">Checkout</Link>
-              </div>
 
+                {cart.length === 0 ? (
+                  <p style={{ color: "#aaa" }}>Your cart is empty.</p>
+                ) : (
+                  cart.map((item) => (
+                    <div className="cart-item" key={item.id}>
+                      <div>
+                        <strong>{item.name}</strong>
+                        <p>
+                          ${Number(item.price).toFixed(2)} × {item.quantity || 1}
+                        </p>
+                      </div>
+
+                      <button
+                        className="remove-btn"
+                        onClick={() => removeFromCart(item.id)}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ))
+                )}
+
+                <h3>Total: ${Number(total).toFixed(2)}</h3>
+
+                <Link to="/checkout" className="btn-primary checkout-btn">
+                  Checkout
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <Footer/>
+      <Footer />
     </>
   );
 }

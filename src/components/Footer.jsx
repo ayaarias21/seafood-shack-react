@@ -1,6 +1,19 @@
 import { Link } from "react-router-dom";
 
 export default function Footer() {
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const footerLinks = [
+    { to: "/about", label: "About Us" },
+    { to: "/menu", label: "Order Online" },
+    { to: "/digital", label: "Digital Menu" },
+    { to: "/gallery", label: "Gallery" },
+    { to: "/contact", label: "Contact" },
+    { to: "/reservation", label: "Make Reservation" },
+  ];
+
   return (
     <footer className="main-footer">
       <div
@@ -25,6 +38,7 @@ export default function Footer() {
           >
             🦀 The Seafood Shack
           </h3>
+
           <p style={{ color: "#888", lineHeight: 1.7, fontSize: "14px" }}>
             Bold Caribbean and Southern coastal flavors. Fresh seafood, great
             company.
@@ -45,17 +59,12 @@ export default function Footer() {
           >
             Explore
           </h3>
-          {[
-            { to: "/about", label: "About Us" },
-            { to: "/menu", label: "Order Online" },
-            { to: "/digital", label: "Digital Menu" },
-            { to: "/gallery", label: "Gallery" },
-            { to: "/contact", label: "Contact" },
-            { to: "/reservation", label: "Make Reservation" },
-          ].map((link) => (
+
+          {footerLinks.map((link) => (
             <Link
               key={link.to}
               to={link.to}
+              onClick={scrollTop}
               style={{
                 display: "block",
                 color: "#777",
@@ -64,8 +73,12 @@ export default function Footer() {
                 marginBottom: "8px",
                 transition: "color 0.2s",
               }}
-              onMouseEnter={(e) => (e.target.style.color = "#ff8c42")}
-              onMouseLeave={(e) => (e.target.style.color = "#777")}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "#ff8c42";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "#777";
+              }}
             >
               {link.label}
             </Link>
@@ -86,6 +99,7 @@ export default function Footer() {
           >
             Hours
           </h3>
+
           {[
             { day: "Mon – Thu", hours: "12PM – 9PM" },
             { day: "Fri – Sat", hours: "12PM – 11PM" },
@@ -120,15 +134,47 @@ export default function Footer() {
           >
             Contact
           </h3>
-          <p style={{ color: "#888", fontSize: "14px", marginBottom: "8px" }}>
+
+          <Link
+            to="/contact"
+            onClick={scrollTop}
+            style={{
+              display: "block",
+              color: "#888",
+              fontSize: "14px",
+              marginBottom: "8px",
+              textDecoration: "none",
+            }}
+          >
             📍 123 Ocean Drive, Atlantis, NY 11111
-          </p>
-          <p style={{ color: "#888", fontSize: "14px", marginBottom: "8px" }}>
+          </Link>
+
+          <Link
+            to="/contact"
+            onClick={scrollTop}
+            style={{
+              display: "block",
+              color: "#888",
+              fontSize: "14px",
+              marginBottom: "8px",
+              textDecoration: "none",
+            }}
+          >
             📞 (777) 123-4567
-          </p>
-          <p style={{ color: "#888", fontSize: "14px" }}>
+          </Link>
+
+          <Link
+            to="/contact"
+            onClick={scrollTop}
+            style={{
+              display: "block",
+              color: "#888",
+              fontSize: "14px",
+              textDecoration: "none",
+            }}
+          >
             📧 info@theseafoodshack.com
-          </p>
+          </Link>
         </div>
       </div>
 
