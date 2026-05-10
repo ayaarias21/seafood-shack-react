@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5050/api";
+const API_URL = "https://seafood-shack-react-production.up.railway.app/api";
 
 export async function getMenuItems() {
   const response = await fetch(`${API_URL}/menu`);
